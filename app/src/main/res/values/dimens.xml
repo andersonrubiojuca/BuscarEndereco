@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="entre_um_campo_e_outro">32dp</dimen>
+    <dimen name="campo_ea_parede" >36dp</dimen>
+</resources>

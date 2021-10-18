@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/cpfFormFragment">
+
+    <fragment
+        android:id="@+id/cpfFormFragment"
+        android:name="com.example.buscarendereo.cpfform.CpfFormFragment"
+        android:label="CpfFormFragment" >
+        <action
+            android:id="@+id/actionCpfFormFragmentToEnderecoFragment"
+            app:destination="@id/enderecoFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/enderecoFragment"
+        android:name="com.example.buscarendereo.enderecofragment.EnderecoFragment"
+        android:label="EnderecoFragment" >
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.example.buscarendereo.network.Endereco"
+            />
+        <action
+            android:id="@+id/action_enderecoFragment_to_cpfFormFragment"
+            app:destination="@id/cpfFormFragment" />
+    </fragment>
+</navigation>
