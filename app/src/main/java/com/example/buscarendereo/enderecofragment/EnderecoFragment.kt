@@ -24,10 +24,13 @@ class EnderecoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View = FragmentEnderecoBinding.inflate(inflater, container, false).apply {
+        binding = this
+        init()
+    }.root
+
+    fun init(){
         val application = requireNotNull(activity).application
-        binding = FragmentEnderecoBinding.inflate(inflater)
-        binding.lifecycleOwner = this
 
         val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
         val viewModelFactory = EnderecoViewModelFactory(endereco, application)
@@ -44,9 +47,6 @@ class EnderecoFragment : Fragment() {
                 )
             }
         })
-
-
-        return binding.root
     }
 
 
