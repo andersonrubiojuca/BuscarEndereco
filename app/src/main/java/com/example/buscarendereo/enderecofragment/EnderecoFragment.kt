@@ -29,27 +29,29 @@ class EnderecoFragment : Fragment() {
         init()
     }.root
 
-    fun init(){
-        val application = requireNotNull(activity).application
-
+    private fun init(){
+        //val application = requireNotNull(activity).application
         val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
-        val viewModelFactory = EnderecoViewModelFactory(endereco, application)
+        val viewModelFactory = EnderecoViewModelFactory(endereco)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(EnderecoViewModel::class.java)
         binding.viewModel = viewModel
 
-        //binding.endereco.text = endereco.toString()
+        setListeners()
+        setObservers()
 
-        viewModel.voltar.observe(viewLifecycleOwner, Observer { voltar ->
-            if (voltar) {
-                this.findNavController().navigate(
-                    EnderecoFragmentDirections.actionEnderecoFragmentToCpfFormFragment()
-                )
-            }
-        })
+        //binding.endereco.text = endereco.toString()
     }
 
+    private fun setListeners(){
+        binding.voltarButton.setOnClickListener {
+            this.findNavController().navigate(
+                EnderecoFragmentDirections.actionEnderecoFragmentToCpfFormFragment()
+            )
+        }
+    }
 
+    private fun setObservers(){}
 
 }
 

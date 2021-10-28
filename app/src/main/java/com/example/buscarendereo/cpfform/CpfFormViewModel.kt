@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 enum class CpfStatus { LOADING, ERROR, DONE }
 
-class CpfFormViewModel() : ViewModel(){
+class CpfFormViewModel: ViewModel(){
 
     private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry() }
 
@@ -31,11 +31,11 @@ class CpfFormViewModel() : ViewModel(){
                 get() = _endereco
 
 
-    fun pesquisar(){
+    fun pesquisar(cepp: String){
         viewModelScope.launch {
             _estado.value = CpfStatus.LOADING
             try {
-                val cepjson = toJson(cep.value)
+                val cepjson = toJson(cepp)
                 cep.value = ""
 
                 _endereco.value = EnderecoApi.retrofitService.getJson(cepjson)

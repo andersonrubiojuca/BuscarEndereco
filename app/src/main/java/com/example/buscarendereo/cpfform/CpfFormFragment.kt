@@ -23,39 +23,51 @@ import timber.log.Timber
  */
 class CpfFormFragment : Fragment() {
 
-    private val viewModel: CpfFormViewModel by lazy {
-        ViewModelProvider(this).get(CpfFormViewModel::class.java)
-    }
-
+    private lateinit var viewModel: CpfFormViewModel
     private lateinit var binding: FragmentCpfFormBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater
+        , container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cpf_form, container, false)
+    ): View = FragmentCpfFormBinding.inflate(inflater, container, false).apply{
+        binding = this
+        init()
+    }.root
 
-        binding.lifecycleOwner = this
+    private fun init(){
+        viewModel =
+            ViewModelProvider(this).get(CpfFormViewModel::class.java)
         binding.viewModel = viewModel
+        setListeners()
+        setObservers()
+    }
 
-        viewModel.endereco.observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                if (this.findNavController().currentDestination?.id == R.id.cpfFormFragment) {
-                    this.findNavController().navigate(
-                        CpfFormFragmentDirections.actionCpfFormFragmentToEnderecoFragment(it)
-                    )
-                }
-                viewModel.apagarCpf()
+    private fun setListeners() {
+        with(binding){
+            pesquisarbutton.setOnClickListener {
+                this@CpfFormFragment.viewModel.pesquisar(cpfCampo.text.toString())
             }
-        })
+        }
+    }
 
-        viewModel.estado.observe(viewLifecycleOwner, Observer {
-            if(it == CpfStatus.ERROR){
+    private fun setObservers() {
+
+        viewModel.estado.observe(viewLifecycleOwner, { estado ->
+            if(estado == CpfStatus.DONE){
+                viewModel.endereco.value?.let {
+                    if (this.findNavController().currentDestination?.id == R.id.cpfFormFragment){
+                        this.findNavController().navigate(
+                            CpfFormFragmentDirections.actionCpfFormFragmentToEnderecoFragment(it)
+                        )
+                    }
+                }
+            }
+
+            if(estado == CpfStatus.ERROR){
                 binding.erroLabel.visibility = View.VISIBLE
             }
         })
-
-        return binding.root
     }
 
 }

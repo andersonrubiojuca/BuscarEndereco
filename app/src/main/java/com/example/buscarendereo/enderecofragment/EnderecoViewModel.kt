@@ -1,12 +1,11 @@
 package com.example.buscarendereo.enderecofragment
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.buscarendereo.network.Endereco
 
-class EnderecoViewModel(endereco: Endereco, app: Application): AndroidViewModel(app) {
+class EnderecoViewModel(endereco: Endereco): ViewModel() {
 
     private val _endereco = MutableLiveData<Endereco>()
             val endereco: LiveData<Endereco>
