@@ -24,7 +24,8 @@ import timber.log.Timber
  */
 class CpfFormFragment : Fragment() {
 
-    private lateinit var viewModel: CpfFormViewModel
+    //private lateinit var viewModel: CpfFormViewModel
+    private val viewModel by viewModel<CpfFormViewModel>()
     private lateinit var binding: FragmentCpfFormBinding
 
     override fun onCreateView(
@@ -37,8 +38,8 @@ class CpfFormFragment : Fragment() {
     }.root
 
     private fun init(){
-        viewModel =
-            ViewModelProvider(this).get(CpfFormViewModel::class.java)
+//        viewModel =
+//            ViewModelProvider(this).get(CpfFormViewModel::class.java)
         binding.viewModel = viewModel
         setListeners()
         setObservers()
