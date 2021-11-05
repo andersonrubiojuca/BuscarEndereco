@@ -92,4 +92,15 @@ dependencies {
     //Data Mask
     implementation 'io.github.vicmikhailau:MaskedEditText:4.0.7'
 
+    // Koin main features for Android (Scope,ViewModel ...)
+    implementation "io.insert-koin:koin-android:$koin_version"
+    // Koin Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    // Koin for Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    // Koin for Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+    // Koin for Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
 }

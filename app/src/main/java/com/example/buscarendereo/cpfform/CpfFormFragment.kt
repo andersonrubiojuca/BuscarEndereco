@@ -14,6 +14,7 @@ import androidx.transition.Visibility
 import com.example.buscarendereo.R
 import com.example.buscarendereo.databinding.FragmentCpfFormBinding
 import kotlinx.android.synthetic.main.fragment_endereco.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -56,6 +57,7 @@ class CpfFormFragment : Fragment() {
         viewModel.estado.observe(viewLifecycleOwner, { estado ->
             if(estado == CpfStatus.DONE){
                 viewModel.endereco.value?.let {
+
                     if (this.findNavController().currentDestination?.id == R.id.cpfFormFragment){
                         this.findNavController().navigate(
                             CpfFormFragmentDirections.actionCpfFormFragmentToEnderecoFragment(it)

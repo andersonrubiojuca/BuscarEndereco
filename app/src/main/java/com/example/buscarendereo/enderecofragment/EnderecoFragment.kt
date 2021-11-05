@@ -14,12 +14,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.buscarendereo.R
 import com.example.buscarendereo.databinding.FragmentEnderecoBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class EnderecoFragment : Fragment() {
 
     private lateinit var binding: FragmentEnderecoBinding
-    private lateinit var viewModel: EnderecoViewModel
+    private val viewModel: EnderecoViewModel by viewModel()
+    //private lateinit var viewModel: EnderecoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +33,10 @@ class EnderecoFragment : Fragment() {
 
     private fun init(){
         //val application = requireNotNull(activity).application
-        val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
-        val viewModelFactory = EnderecoViewModelFactory(endereco)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(EnderecoViewModel::class.java)
+//        val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
+//        val viewModelFactory = EnderecoViewModelFactory(endereco)
+//        viewModel = ViewModelProvider(this, viewModelFactory)
+//            .get(EnderecoViewModel::class.java)
         binding.viewModel = viewModel
 
         setListeners()

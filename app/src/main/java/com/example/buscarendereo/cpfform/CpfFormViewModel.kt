@@ -1,6 +1,5 @@
 package com.example.buscarendereo.cpfform
 
-import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,23 +12,15 @@ enum class CpfStatus { LOADING, ERROR, DONE }
 
 class CpfFormViewModel: ViewModel(){
 
-    private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry() }
+    var cep = MutableLiveData<String>()
 
-    private val _estado = MutableLiveData<CpfStatus>()
+    private var _estado = MutableLiveData<CpfStatus>()
             val estado: LiveData<CpfStatus>
                 get() = _estado
 
-    var cep = MutableLiveData<String>()
-
-    init {
-        cep.value = ""
-    }
-
-
-    private val _endereco = MutableLiveData<Endereco>()
+    private var _endereco = MutableLiveData<Endereco>()
             val endereco: LiveData<Endereco>
                 get() = _endereco
-
 
     fun pesquisar(cepp: String){
         viewModelScope.launch {
@@ -46,11 +37,7 @@ class CpfFormViewModel: ViewModel(){
                 e.message
             }
         }
-        cep.value = _endereco.value.toString()
-    }
-
-    fun apagarCpf(){
-        cep.value = ""
+        cep.value = endereco.value.toString()
     }
 
     private fun toJson(valor: String?): String{

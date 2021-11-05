@@ -11,17 +11,8 @@ class EnderecoViewModel(endereco: Endereco): ViewModel() {
             val endereco: LiveData<Endereco>
                 get() = _endereco
 
-    private val _voltar = MutableLiveData<Boolean>()
-            val voltar: LiveData<Boolean>
-                get() = _voltar
-
     init {
         _endereco.value = endereco
-        _voltar.value = false
-    }
-
-    fun retornar(){
-        _voltar.value = true
     }
 
 }
