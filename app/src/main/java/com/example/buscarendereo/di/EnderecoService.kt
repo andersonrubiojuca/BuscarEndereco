@@ -2,11 +2,11 @@ package com.example.buscarendereo.di
 
 import com.example.buscarendereo.network.Endereco
 
-interface EnderecoServiceInt {
+interface EnderecoRepository {
     fun ende(): Endereco
 }
 
-class EnderecoServiceImpl(private val enderecoData: Endereco): EnderecoServiceInt{
+class EnderecoServiceImpl(val enderecoData: Endereco): EnderecoRepository{
     override fun ende(): Endereco {
         return enderecoData
     }
