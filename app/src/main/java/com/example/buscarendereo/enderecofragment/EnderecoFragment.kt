@@ -14,13 +14,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.buscarendereo.R
 import com.example.buscarendereo.databinding.FragmentEnderecoBinding
+import org.koin.androidx.navigation.koinNavGraphViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class EnderecoFragment : Fragment() {
 
     private lateinit var binding: FragmentEnderecoBinding
-    private val viewModel: EnderecoViewModel by viewModel()
+    private val viewModel: EnderecoViewModel by koinNavGraphViewModel(R.id.nav_main)
     //private lateinit var viewModel: EnderecoViewModel
 
     override fun onCreateView(

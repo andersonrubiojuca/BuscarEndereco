@@ -1,6 +1,7 @@
 package com.example.buscarendereo.cpfform
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -69,6 +70,7 @@ class CpfFormFragment : Fragment() {
 
             if(estado == CpfStatus.ERROR){
                 binding.erroLabel.visibility = View.VISIBLE
+                binding.cpfCampo.setText("")
             }
         })
     }

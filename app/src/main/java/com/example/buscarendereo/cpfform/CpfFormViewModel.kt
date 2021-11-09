@@ -37,7 +37,7 @@ class CpfFormViewModel: ViewModel(){
                 e.message
             }
         }
-        cep.value = endereco.value.toString()
+        //cep.value = endereco.value.toString()
     }
 
     private fun toJson(valor: String?): String{
