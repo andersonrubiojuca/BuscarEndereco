@@ -5,13 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.buscarendereo.network.Endereco
 
-class EnderecoViewModel(): ViewModel() {
+class EnderecoViewModel: ViewModel() {
 
-    private val _endereco = MutableLiveData<Endereco>()
-            val endereco: LiveData<Endereco>
-                get() = _endereco
+    internal sealed class Action(var endereco: Endereco){
+    }
+
+    private val action = MutableLiveData<Action>()
 
     fun setEndereco(endereco: Endereco){
-        _endereco.value = endereco
+        action.value?.endereco = endereco
     }
 }

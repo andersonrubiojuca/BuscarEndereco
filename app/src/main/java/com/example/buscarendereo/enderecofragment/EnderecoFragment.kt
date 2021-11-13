@@ -8,6 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.buscarendereo.databinding.FragmentEnderecoBinding
+import com.example.buscarendereo.network.Endereco
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -25,11 +26,27 @@ class EnderecoFragment : Fragment() {
     }.root
 
     private fun init(){
-        viewModel.setEndereco(EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty)
+        val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
+        viewModel.setEndereco(endereco)
         binding.viewModel = viewModel
 
+        setValues(endereco)
         setListeners()
         setObservers()
+    }
+
+    // sinto que estou fazendo errado
+    private fun setValues(endereco: Endereco) {
+        binding.cepResultado.setText(endereco.cep)
+        binding.logradouroCampo.setText(endereco.logradouro)
+        binding.complementoCampo.setText(endereco.complemento)
+        binding.bairroCampo.setText(endereco.bairro)
+        binding.cidadeCampo.setText(endereco.localidade)
+        binding.ufCampo.setText(endereco.uf)
+        binding.ibgeCampo.setText(endereco.ibge)
+        binding.giaCampo.setText(endereco.gia)
+        binding.dddCampo.setText(endereco.ddd)
+        binding.siafiCampo.setText(endereco.siafi)
     }
 
     private fun setListeners(){
