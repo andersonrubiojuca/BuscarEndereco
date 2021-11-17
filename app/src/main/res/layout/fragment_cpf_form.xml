@@ -36,7 +36,6 @@
             android:hint="@string/cpf_hint"
             android:inputType="number"
             android:minHeight="48dp"
-            android:text="@={viewModel.cep}"
             app:mask="#####-###"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cpfLabel"

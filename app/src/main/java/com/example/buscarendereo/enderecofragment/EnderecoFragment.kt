@@ -30,13 +30,13 @@ class EnderecoFragment : Fragment() {
         viewModel.setEndereco(endereco)
         binding.viewModel = viewModel
 
-        setValues(endereco)
-        setListeners()
+        setListeners(endereco)
         setObservers()
     }
 
-    // sinto que estou fazendo errado
-    private fun setValues(endereco: Endereco) {
+
+    private fun setListeners(endereco: Endereco){
+        // sinto que estou fazendo errado
         binding.cepResultado.setText(endereco.cep)
         binding.logradouroCampo.setText(endereco.logradouro)
         binding.complementoCampo.setText(endereco.complemento)
@@ -47,9 +47,7 @@ class EnderecoFragment : Fragment() {
         binding.giaCampo.setText(endereco.gia)
         binding.dddCampo.setText(endereco.ddd)
         binding.siafiCampo.setText(endereco.siafi)
-    }
 
-    private fun setListeners(){
         binding.voltarButton.setOnClickListener {
             voltar()
         }

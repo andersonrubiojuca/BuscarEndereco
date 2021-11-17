@@ -4,40 +4,44 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.buscarendereo.enderecofragment.EnderecoViewModel
 import com.example.buscarendereo.network.Endereco
 import com.example.buscarendereo.network.EnderecoApi
 import kotlinx.coroutines.launch
 
-enum class CpfStatus { LOADING, ERROR, DONE }
+enum class CpfStatus {LOADING, ERROR, DONE }
 
 class CpfFormViewModel: ViewModel(){
 
-    var cep = MutableLiveData<String>()
+    internal sealed class Action{
+        data class ChangeEndereco(val cpfStatus: CpfStatus): Action()
+    }
 
-    private var _estado = MutableLiveData<CpfStatus>()
-            val estado: LiveData<CpfStatus>
-                get() = _estado
+    internal val action = MutableLiveData<Action>()
 
-    private var _endereco = MutableLiveData<Endereco>()
-            val endereco: LiveData<Endereco>
-                get() = _endereco
 
-    fun pesquisar(cepp: String){
+//    private var _estado = MutableLiveData<CpfStatus>()
+//            val estado: LiveData<CpfStatus>
+//                get() = _estado
+
+//    private var _endereco = MutableLiveData<Endereco>()
+//            val endereco: LiveData<Endereco>
+//                get() = _endereco
+
+    fun pesquisar(cepp: String): Endereco?{
+        var endereco: Endereco? = null
         viewModelScope.launch {
-            _estado.value = CpfStatus.LOADING
+            action.postValue(Action.ChangeEndereco(CpfStatus.LOADING))
             try {
-                val cepjson = toJson(cepp)
-                cep.value = ""
-
-                _endereco.value = EnderecoApi.retrofitService.getJson(cepjson)
-                _estado.value = CpfStatus.DONE
+                endereco = EnderecoApi.retrofitService.getJson(toJson(cepp))
+                action.postValue(Action.ChangeEndereco(CpfStatus.DONE))
             } catch (e: Exception){
-                _estado.value = CpfStatus.ERROR
-                cep.value = ""
+                action.postValue(Action.ChangeEndereco(CpfStatus.ERROR))
                 e.message
             }
         }
-        //cep.value = endereco.value.toString()
+
+        return endereco
     }
 
     private fun toJson(valor: String?): String{
