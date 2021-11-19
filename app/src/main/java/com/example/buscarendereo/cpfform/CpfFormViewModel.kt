@@ -1,13 +1,9 @@
 package com.example.buscarendereo.cpfform
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.buscarendereo.enderecofragment.EnderecoViewModel
 import com.example.buscarendereo.network.Endereco
 import com.example.buscarendereo.network.EnderecoApi
-import kotlinx.coroutines.launch
 
 enum class CpfStatus {LOADING, ERROR, DONE }
 
@@ -19,29 +15,21 @@ class CpfFormViewModel: ViewModel(){
 
     internal val action = MutableLiveData<Action>()
 
+    suspend fun pesquisar(cep: String): Endereco?{
+        val endereco: Endereco?
 
-//    private var _estado = MutableLiveData<CpfStatus>()
-//            val estado: LiveData<CpfStatus>
-//                get() = _estado
+        action.postValue(Action.ChangeEndereco(CpfStatus.LOADING))
+        return try {
+            endereco = EnderecoApi.retrofitService.getJson(toJson(cep))
+            action.postValue(Action.ChangeEndereco(CpfStatus.DONE))
 
-//    private var _endereco = MutableLiveData<Endereco>()
-//            val endereco: LiveData<Endereco>
-//                get() = _endereco
+            endereco
+        } catch (e: Exception){
+            action.postValue(Action.ChangeEndereco(CpfStatus.ERROR))
+            e.message
 
-    fun pesquisar(cepp: String): Endereco?{
-        var endereco: Endereco? = null
-        viewModelScope.launch {
-            action.postValue(Action.ChangeEndereco(CpfStatus.LOADING))
-            try {
-                endereco = EnderecoApi.retrofitService.getJson(toJson(cepp))
-                action.postValue(Action.ChangeEndereco(CpfStatus.DONE))
-            } catch (e: Exception){
-                action.postValue(Action.ChangeEndereco(CpfStatus.ERROR))
-                e.message
-            }
+            null
         }
-
-        return endereco
     }
 
     private fun toJson(valor: String?): String{

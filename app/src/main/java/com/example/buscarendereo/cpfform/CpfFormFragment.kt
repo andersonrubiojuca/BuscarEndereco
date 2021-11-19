@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.buscarendereo.R
 import com.example.buscarendereo.databinding.FragmentCpfFormBinding
 import com.example.buscarendereo.network.Endereco
 import kotlinx.android.synthetic.main.fragment_endereco.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CpfFormFragment : Fragment() {
@@ -36,7 +38,10 @@ class CpfFormFragment : Fragment() {
     private fun setListeners() {
         with(binding){
             pesquisarbutton.setOnClickListener {
-                this@CpfFormFragment.endereco = this@CpfFormFragment.viewModel.pesquisar(cpfCampo.text.toString())
+                lifecycleScope.launch {
+                    this@CpfFormFragment.endereco =
+                        this@CpfFormFragment.viewModel.pesquisar(cpfCampo.text.toString())
+                }
             }
         }
     }

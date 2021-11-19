@@ -27,7 +27,6 @@ class EnderecoFragment : Fragment() {
 
     private fun init(){
         val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
-        viewModel.setEndereco(endereco)
         binding.viewModel = viewModel
 
         setListeners(endereco)
@@ -36,7 +35,6 @@ class EnderecoFragment : Fragment() {
 
 
     private fun setListeners(endereco: Endereco){
-        // sinto que estou fazendo errado
         binding.cepResultado.setText(endereco.cep)
         binding.logradouroCampo.setText(endereco.logradouro)
         binding.complementoCampo.setText(endereco.complemento)
