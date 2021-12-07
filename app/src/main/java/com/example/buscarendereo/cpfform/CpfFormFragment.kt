@@ -30,7 +30,7 @@ class CpfFormFragment : Fragment() {
     }.root
 
     private fun init(){
-        binding.viewModel = viewModel
+        //binding.viewModel = viewModel
         setListeners()
         setObservers()
     }
@@ -40,7 +40,7 @@ class CpfFormFragment : Fragment() {
             pesquisarbutton.setOnClickListener {
                 lifecycleScope.launch {
                     this@CpfFormFragment.endereco =
-                        this@CpfFormFragment.viewModel.pesquisar(cpfCampo.text.toString())
+                        this@CpfFormFragment.viewModel.find(cpfCampo.text.toString())
                 }
             }
         }
@@ -50,13 +50,13 @@ class CpfFormFragment : Fragment() {
 
         viewModel.action.observe(viewLifecycleOwner, { action ->
             when(action){
-                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.DONE) -> entrar()
-                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.ERROR) -> retornarErro()
+                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.DONE) -> enter()
+                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.ERROR) -> returnError()
             }
         })
     }
 
-    private fun entrar(){
+    private fun enter(){
         val enderecoNav = endereco
         enderecoNav?.let {
             //esse if evita um bug que evita de ir na segunda tela
@@ -66,11 +66,11 @@ class CpfFormFragment : Fragment() {
                 )
             }
         } ?: run {
-            retornarErro()
+            returnError()
         }
     }
 
-    private fun retornarErro(){
+    private fun returnError(){
         binding.erroLabel.visibility = View.VISIBLE
         binding.cpfCampo.setText("")
     }

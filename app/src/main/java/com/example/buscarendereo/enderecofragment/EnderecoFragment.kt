@@ -27,7 +27,7 @@ class EnderecoFragment : Fragment() {
 
     private fun init(){
         val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
-        binding.viewModel = viewModel
+        //binding.viewModel = viewModel
 
         setListeners(endereco)
         setObservers()
@@ -35,20 +35,23 @@ class EnderecoFragment : Fragment() {
 
 
     private fun setListeners(endereco: Endereco){
-        binding.cepResultado.setText(endereco.cep)
-        binding.logradouroCampo.setText(endereco.logradouro)
-        binding.complementoCampo.setText(endereco.complemento)
-        binding.bairroCampo.setText(endereco.bairro)
-        binding.cidadeCampo.setText(endereco.localidade)
-        binding.ufCampo.setText(endereco.uf)
-        binding.ibgeCampo.setText(endereco.ibge)
-        binding.giaCampo.setText(endereco.gia)
-        binding.dddCampo.setText(endereco.ddd)
-        binding.siafiCampo.setText(endereco.siafi)
+        with(binding){
+            cepResultado.setText(endereco.cep)
+            logradouroCampo.setText(endereco.logradouro)
+            complementoCampo.setText(endereco.complemento)
+            bairroCampo.setText(endereco.bairro)
+            cidadeCampo.setText(endereco.localidade)
+            ufCampo.setText(endereco.uf)
+            ibgeCampo.setText(endereco.ibge)
+            giaCampo.setText(endereco.gia)
+            dddCampo.setText(endereco.ddd)
+            siafiCampo.setText(endereco.siafi)
 
-        binding.voltarButton.setOnClickListener {
-            voltar()
+            voltarButton.setOnClickListener {
+                back()
+            }
         }
+
 
         /**
          * por algum motivo só com esse comando para o back funcionar...
@@ -57,14 +60,14 @@ class EnderecoFragment : Fragment() {
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
-                    voltar()
+                    back()
                 }
             })
     }
 
     private fun setObservers(){}
 
-    private fun voltar() {
+    private fun back() {
         this.findNavController().navigate(
             EnderecoFragmentDirections.actionEnderecoFragmentToCpfFormFragment()
         )

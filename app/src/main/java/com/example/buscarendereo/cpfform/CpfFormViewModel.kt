@@ -15,7 +15,7 @@ class CpfFormViewModel: ViewModel(){
 
     internal val action = MutableLiveData<Action>()
 
-    suspend fun pesquisar(cep: String): Endereco?{
+    suspend fun find(cep: String): Endereco?{
         val endereco: Endereco?
 
         action.postValue(Action.ChangeEndereco(CpfStatus.LOADING))
