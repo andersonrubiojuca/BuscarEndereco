@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.buscarendereo.R
 import com.example.buscarendereo.databinding.FragmentCpfFormBinding
-import com.example.buscarendereo.network.Endereco
+import com.example.buscarendereo.domain.network.Endereco
 import kotlinx.android.synthetic.main.fragment_endereco.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,8 +38,8 @@ class CpfFormFragment : Fragment() {
         with(binding){
             pesquisarbutton.setOnClickListener {
                 lifecycleScope.launch {
-                    this@CpfFormFragment.endereco =
-                        this@CpfFormFragment.viewModel.find(cpfCampo.text.toString())
+                    //this@CpfFormFragment.endereco =
+                    this@CpfFormFragment.viewModel.find(cpfCampo.text.toString())
                 }
             }
         }
@@ -50,22 +49,19 @@ class CpfFormFragment : Fragment() {
 
         viewModel.action.observe(viewLifecycleOwner, { action ->
             when(action){
-                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.DONE) -> enter()
-                CpfFormViewModel.Action.ChangeEndereco(CpfStatus.ERROR) -> returnError()
+                is CpfFormViewModel.Action.ChangeEndereco -> enter(action.endereco)
             }
         })
     }
 
-    private fun enter(){
-        val enderecoNav = endereco
-        enderecoNav?.let {
-            //esse if evita um bug que evita de ir na segunda tela
-            if (this.findNavController().currentDestination?.id == R.id.cpfFormFragment) {
-                this.findNavController().navigate(
-                    CpfFormFragmentDirections.actionCpfFormFragmentToEnderecoFragment(enderecoNav)
+    private fun enter(endereco: Endereco){
+
+        // pode ser qualquer atributo (menos os ocultos)
+        if (endereco.bairro != "") {
+            findNavController().navigate(
+                    CpfFormFragmentDirections.actionCpfFormFragmentToEnderecoFragment(endereco)
                 )
-            }
-        } ?: run {
+        } else {
             returnError()
         }
     }

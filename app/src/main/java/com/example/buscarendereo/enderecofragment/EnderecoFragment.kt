@@ -8,7 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.buscarendereo.databinding.FragmentEnderecoBinding
-import com.example.buscarendereo.network.Endereco
+import com.example.buscarendereo.domain.network.Endereco
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

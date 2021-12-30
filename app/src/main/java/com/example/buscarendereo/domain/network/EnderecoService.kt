@@ -1,4 +1,4 @@
-package com.example.buscarendereo.network
+package com.example.buscarendereo.domain.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -2,19 +2,40 @@ package com.example.buscarendereo.cpfform
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.buscarendereo.network.Endereco
-import com.example.buscarendereo.network.EnderecoApi
+import androidx.lifecycle.viewModelScope
+import com.example.buscarendereo.domain.network.Endereco
+import com.example.buscarendereo.domain.network.EnderecoApi
+import com.example.buscarendereo.domain.userCases.GetCepInformationUserCase
+import kotlinx.coroutines.launch
 
 enum class CpfStatus {LOADING, ERROR, DONE }
 
-class CpfFormViewModel: ViewModel(){
+class CpfFormViewModel(
+    private val getCepInformation: GetCepInformationUserCase
+): ViewModel(){
 
-    internal sealed class Action{
-        data class ChangeEndereco(val cpfStatus: CpfStatus): Action()
+    sealed class Action{
+        data class ChangeEndereco(val endereco: Endereco): Action()
     }
 
     internal val action = MutableLiveData<Action>()
 
+    fun find(cep: String){
+        val rawCep = toJson(cep)
+        viewModelScope.launch {
+            runCatching { getCepInformation(rawCep) }
+                .onSuccess {
+                    action.postValue(Action.ChangeEndereco(it))
+                }
+                .onFailure {
+                    action.postValue(Action.ChangeEndereco(
+                        Endereco("", "", "", "", "", "", "", "", "", ""))
+                    )
+                }
+        }
+    }
+
+    /*
     suspend fun find(cep: String): Endereco?{
         val endereco: Endereco?
 
@@ -31,6 +52,8 @@ class CpfFormViewModel: ViewModel(){
             null
         }
     }
+
+     */
 
     private fun toJson(valor: String?): String{
         if (valor != null)

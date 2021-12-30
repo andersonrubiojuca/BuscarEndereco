@@ -1,4 +1,4 @@
-package com.example.buscarendereo.network
+package com.example.buscarendereo.domain.network
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -19,7 +19,7 @@
         android:label="EnderecoFragment" >
         <argument
             android:name="selectedProperty"
-            app:argType="com.example.buscarendereo.network.Endereco"
+            app:argType="com.example.buscarendereo.domain.network.Endereco"
             />
         <action
             android:id="@+id/action_enderecoFragment_to_cpfFormFragment"
