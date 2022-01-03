@@ -27,7 +27,6 @@ class EnderecoFragment : Fragment() {
 
     private fun init(){
         val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
-        //binding.viewModel = viewModel
 
         setListeners(endereco)
         setObservers()

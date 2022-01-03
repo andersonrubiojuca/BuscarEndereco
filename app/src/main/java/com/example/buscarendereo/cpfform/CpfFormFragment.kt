@@ -16,7 +16,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CpfFormFragment : Fragment() {
 
     private val viewModel by viewModel<CpfFormViewModel>()
-    private var endereco: Endereco? = null
     private lateinit var binding: FragmentCpfFormBinding
 
     override fun onCreateView(
@@ -38,7 +37,6 @@ class CpfFormFragment : Fragment() {
         with(binding){
             pesquisarbutton.setOnClickListener {
                 lifecycleScope.launch {
-                    //this@CpfFormFragment.endereco =
                     this@CpfFormFragment.viewModel.find(cpfCampo.text.toString())
                 }
             }
