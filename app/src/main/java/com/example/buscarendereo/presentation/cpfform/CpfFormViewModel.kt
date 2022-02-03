@@ -1,4 +1,4 @@
-package com.example.buscarendereo.cpfform
+package com.example.buscarendereo.presentation.cpfform
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

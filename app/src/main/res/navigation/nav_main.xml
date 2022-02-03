@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/cpfFormFragment"
-        android:name="com.example.buscarendereo.cpfform.CpfFormFragment"
+        android:name="com.example.buscarendereo.presentation.cpfform.CpfFormFragment"
         android:label="CpfFormFragment" >
         <action
             android:id="@+id/actionCpfFormFragmentToEnderecoFragment"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/enderecoFragment"
-        android:name="com.example.buscarendereo.enderecofragment.EnderecoFragment"
+        android:name="com.example.buscarendereo.presentation.enderecofragment.EnderecoFragment"
         android:label="EnderecoFragment" >
         <argument
             android:name="selectedProperty"

@@ -1,4 +1,4 @@
-package com.example.buscarendereo.cpfform
+package com.example.buscarendereo.presentation.cpfform
 
 import android.os.Bundle
 import android.view.LayoutInflater

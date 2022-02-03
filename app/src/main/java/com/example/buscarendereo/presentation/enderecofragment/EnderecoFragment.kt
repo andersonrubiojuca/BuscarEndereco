@@ -1,4 +1,4 @@
-package com.example.buscarendereo.enderecofragment
+package com.example.buscarendereo.presentation.enderecofragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,10 +26,11 @@ class EnderecoFragment : Fragment() {
     }.root
 
     private fun init(){
-        val endereco = EnderecoFragmentArgs.fromBundle(requireArguments()).selectedProperty
+        val endereco = com.example.buscarendereo.presentation.enderecofragment.EnderecoFragmentArgs.fromBundle(
+            requireArguments()
+        ).selectedProperty
 
         setListeners(endereco)
-        setObservers()
     }
 
 
@@ -64,11 +65,10 @@ class EnderecoFragment : Fragment() {
             })
     }
 
-    private fun setObservers(){}
 
     private fun back() {
         this.findNavController().navigate(
-            EnderecoFragmentDirections.actionEnderecoFragmentToCpfFormFragment()
+            com.example.buscarendereo.presentation.enderecofragment.EnderecoFragmentDirections.actionEnderecoFragmentToCpfFormFragment()
         )
     }
 

@@ -1,4 +1,4 @@
-package com.example.buscarendereo.enderecofragment
+package com.example.buscarendereo.presentation.enderecofragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

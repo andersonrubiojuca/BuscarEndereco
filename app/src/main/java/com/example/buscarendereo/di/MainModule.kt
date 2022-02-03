@@ -1,8 +1,8 @@
 package com.example.buscarendereo.di
 
 import com.example.buscarendereo.core.enderecoServiceCore
-import com.example.buscarendereo.cpfform.CpfFormViewModel
-import com.example.buscarendereo.enderecofragment.EnderecoViewModel
+import com.example.buscarendereo.presentation.cpfform.CpfFormViewModel
+import com.example.buscarendereo.presentation.enderecofragment.EnderecoViewModel
 import com.example.buscarendereo.domain.network.EnderecoService
 import com.example.buscarendereo.domain.network.GetCepInformationDataSource
 import com.example.buscarendereo.domain.repository.GetCepInformationRepository
