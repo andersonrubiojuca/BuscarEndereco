@@ -20,11 +20,16 @@ class CpfFormViewModel(
     fun find(cep: String){
         val rawCep = toJson(cep)
         viewModelScope.launch {
-            runCatching { getCepInformation(rawCep) }
+            runCatching {
+                getCepInformation(rawCep)
+                // aqui e nos offlaod() que poderia estar o onLoad
+            }
                 .onSuccess {
+                    //offload()
                     action.postValue(Action.ChangeEndereco(it))
                 }
                 .onFailure {
+                    //offload()
                     action.postValue(Action.ChangeEndereco(
                         Endereco("", "", "", "", "", "", "", "", "", ""))
                     )
