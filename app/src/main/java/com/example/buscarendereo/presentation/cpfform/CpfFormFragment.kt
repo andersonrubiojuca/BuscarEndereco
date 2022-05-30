@@ -45,11 +45,11 @@ class CpfFormFragment : Fragment() {
 
     private fun setObservers() {
 
-        viewModel.action.observe(viewLifecycleOwner, { action ->
-            when(action){
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
                 is CpfFormViewModel.Action.ChangeEndereco -> enter(action.endereco)
             }
-        })
+        }
     }
 
     private fun enter(endereco: Endereco){
