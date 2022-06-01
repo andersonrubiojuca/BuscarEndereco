@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
     app:startDestination="@id/cpfFormFragment">
 
     <fragment
         android:id="@+id/cpfFormFragment"
         android:name="com.example.buscarendereo.presentation.cpfform.CpfFormFragment"
-        android:label="CpfFormFragment" >
+        android:label="CpfFormFragment"
+        tools:layout="@layout/fragment_cpf_form">
         <action
             android:id="@+id/actionCpfFormFragmentToEnderecoFragment"
             app:destination="@id/enderecoFragment"/>
@@ -16,7 +18,8 @@
     <fragment
         android:id="@+id/enderecoFragment"
         android:name="com.example.buscarendereo.presentation.enderecofragment.EnderecoFragment"
-        android:label="EnderecoFragment" >
+        android:label="EnderecoFragment"
+        tools:layout="@layout/fragment_endereco">
         <argument
             android:name="selectedProperty"
             app:argType="com.example.buscarendereo.domain.network.Endereco"
