@@ -1,36 +1,13 @@
 package com.example.buscarendereo
 
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
-import com.example.buscarendereo.di.apiModules
-import com.example.buscarendereo.di.domainModule
-import com.example.buscarendereo.di.viewModelModules
 import com.example.buscarendereo.presentation.MainActivity
-import com.example.buscarendereo.presentation.cpfform.CpfFormFragment
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
-import org.koin.test.KoinTestRule
-import kotlin.coroutines.coroutineContext
 
 @RunWith(AndroidJUnit4::class)
 class EnderecoInsTest {
@@ -50,7 +27,7 @@ class EnderecoInsTest {
 
 
     @Test
-    fun givenCPF_whenAcess_shouldGoToEnderetoAndReturnTrue(){
+    fun givenCPF_whenAccess_shouldGoToEnderecoAndReturnTrue(){
 
         val cpf = "29161758"
 
@@ -64,6 +41,62 @@ class EnderecoInsTest {
 
         enderecoAssert{
             assertEnderecoHasAccepted()
+        }
+    }
+
+    @Test
+    fun givenCPF_whenAccess_shouldGoToEnderecoAndReturnFalse(){
+
+        val cpf = "87954317"
+
+        enderecoAct{
+            typeCPF(cpf)
+            cpfClick()
+        }
+
+        //TODO tem uma forma melhor de se resolver isso
+        Thread.sleep(3000)
+
+        enderecoAssert{
+            assertEnderecoHasNegated()
+        }
+    }
+
+    @Test
+    fun givenCPF_whenAccess_shouldGoToEnderecoTextAndReturnTrue(){
+
+        val cpf = "01504000"
+        val rua = "Rua Vergueiro"
+
+        enderecoAct{
+            typeCPF(cpf)
+            cpfClick()
+        }
+
+        //TODO tem uma forma melhor de se resolver isso
+        Thread.sleep(3000)
+
+        enderecoAssert{
+            assertEnderecoTextHasAccepted(rua)
+        }
+    }
+
+    @Test
+    fun givenCPF_whenAccess_shouldGoToEnderecoTextAndReturnFalse(){
+
+        val cpf = "01504000"
+        val rua = "Rua Vergueiroo"
+
+        enderecoAct{
+            typeCPF(cpf)
+            cpfClick()
+        }
+
+        //TODO tem uma forma melhor de se resolver isso
+        Thread.sleep(3000)
+
+        enderecoAssert{
+            assertEnderecoTextHasNegated(rua)
         }
     }
 
